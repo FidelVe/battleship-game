@@ -90,7 +90,7 @@ function randomShipsArray(amountOf=5) {
   return shipArray;
 }
 function hitOrMiss(userString, arrayOfShips) {
-    //checks if the user input cell hits or misses any ship. if hit returns the user cell, if miss returns false.
+    //checks if the user input cell hits or misses any ship. if hit returns the user cell and true, if miss returns the user cell and false.
     let cellArr = charToNum(validateInput(userString));
     if (typeof(cellArr) == 'boolean') {
         //if the user input string is not a valid cell in the board, raise alert window asking for valid input. Maybe this validation should be done in a previous function?
@@ -119,6 +119,42 @@ function drawOnBoard([cellArray, isHit]) {
         boardObj[cellArray[0]][cellArray[1]].innerHTML = 'MISS';
     }
 }
+function newPlayedCell(arr) {
+  //check if the user input cell has been played before, if not returns true, else return false.
+  if (cellsPlayed.length > 0) {
+    for (each of cellsPlayed) {
+      if (String(each) == String(arr)) {
+        return false;
+      } 
+    }
+  } else {
+    return true;
+  }
+  return true;
+}
+function gameLoop() {
+    //loops that runs every time the user enters a cell and hits the button.
+    //when user clicks on button,take input from cell and validate it
+    cellToPlay = document.getElementById('input1').value;
+    cellToPlayIsValid = validateInput(cellToPlay);
+    console.log(cellToPlayIsValid);
+    console.log(typeof(cellToPlayIsValid));
+    //if input is a valid cell in the board continue with sequence, else raise alert
+    if (typeof(cellToPlayIsValid) == 'string') {
+        let cellToArr = charToNum(cellToPlayIsValid);
+//      console.log(cellToArr);
+      if (newPlayedCell(cellToArr)) {
+        //if the cell havent been played before
+        cellsPlayed.push(cellToArr);
+      } else {
+        alert('you already played that cell');
+      }
+    } else {
+        alert('Enter a valid cell in the board');
+    }
+    //
+}
+//initializing game
 //retrieving the board from the DOM
 boardObj = {
     '0': {
@@ -186,3 +222,12 @@ boardObj = {
     }
     
 };
+//setting up random ships on the board and initial empty variables
+randShips = randomShipsArray();
+cellsPlayed = [];
+countsOfHit = 0;
+countsOfMiss = 0;
+cellsLeftToDestroy = randShips.length * 3;
+//bound button click to function
+btn1 = document.getElementById('button1');
+btn1.onclick = function(){gameLoop()};
