@@ -1,0 +1,30 @@
+h1, table, div {
+  margin: 10px auto;
+  width: 400px;
+}
+h1 {
+  text-align: center;
+}
+table {
+  width: 400px;
+  height: 400px;
+  text-align: center;
+  border-style: solid;
+  border-width: thin;
+  border-collapse: collapse;
+}
+table * {
+  border-width: thin;
+  border-style: solid;
+}
+table caption {
+  text-transform: uppercase;
+  border: none;
+}
+table th {
+  border-style: dashed;
+}
+table td {
+  border-color: black;
+  color: hsl(0, 50%, 70%);
+}
