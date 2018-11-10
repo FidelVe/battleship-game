@@ -89,26 +89,18 @@ function randomShipsArray(amountOf=5) {
   }
   return shipArray;
 }
-function hitOrMiss(userString, arrayOfShips) {
+function hitOrMiss(cellArr, arrayOfShips) {
     //checks if the user input cell hits or misses any ship. if hit returns the user cell and true, if miss returns the user cell and false.
-    let cellArr = charToNum(validateInput(userString));
-    if (typeof(cellArr) == 'boolean') {
-        //if the user input string is not a valid cell in the board, raise alert window asking for valid input. Maybe this validation should be done in a previous function?
-        alert('Enter a valid cell in the board');
-        return false;
-    } else {
-        //if the user input string is a valid cell in the board
-        for (eachShip of arrayOfShips) {
-            for (eachCell of eachShip) {
-                if (eachCell.toString() == cellArr.toString()) {
-                    alert('You HIT!');
-                    return [cellArr, true];
-                }
+    for (eachShip of arrayOfShips) {
+        for (eachCell of eachShip) {
+            if (eachCell.toString() == cellArr.toString()) {
+                alert('You HIT!');
+                return [cellArr, true];
             }
         }
-        alert('You MISS!');
-        return [cellArr, false];
     }
+    alert('You MISS!');
+        return [cellArr, false];
 }
 function drawOnBoard([cellArray, isHit]) {
     //if isHit == true, draws 'HIT' on the giving cellArray in the board, else draws 'MISS'
@@ -118,6 +110,7 @@ function drawOnBoard([cellArray, isHit]) {
     } else {
         boardObj[cellArray[0]][cellArray[1]].innerHTML = 'MISS';
     }
+  boardObj[cellArray[0]][cellArray[1]].bgColor = 'lightgrey';
 }
 function newPlayedCell(arr) {
   //check if the user input cell has been played before, if not returns true, else return false.
@@ -131,6 +124,17 @@ function newPlayedCell(arr) {
     return true;
   }
   return true;
+}
+function updateSummary() {
+  p1 = document.getElementById("p1");
+  p2 = document.getElementById("p2");
+  p3 = document.getElementById("p3");
+  p4 = document.getElementById("p4");
+  //
+  p1.innerHTML = `Number of cells Played: ${countsOfHit + countsOfMiss}`;
+  p2.innerHTML = `Number of Hits: ${countsOfHit}`;
+  p3.innerHTML = `Number of Miss: ${countsOfMiss}`;
+  p4.innerHTML = `Cells left to destroy: ${cellsLeftToDestroy}`;
 }
 function gameLoop() {
     //loops that runs every time the user enters a cell and hits the button.
@@ -146,17 +150,33 @@ function gameLoop() {
       if (newPlayedCell(cellToArr)) {
         //if the cell havent been played before
         cellsPlayed.push(cellToArr);
+        //add the played cell to an array to keep track of all the played cells
+        let cellToArrChecked = hitOrMiss(cellToArr, randShips);
+        //check to see if the input is a hit or a miss
+        drawOnBoard(cellToArrChecked);
+        //draw the hit or miss to the board
+        if (cellToArrChecked[1]) {
+          //if the input is a 'hit' keep a count of how many hits are so far
+          countsOfHit++;
+          cellsLeftToDestroy--;
+          if (cellsLeftToDestroy == 0) {
+            alert('Congratulations! you sank all the ships!');
+          }
+        } else {
+          //if its a 'miss' keep a count of how many misses are so far
+          countsOfMiss++;
+        }
       } else {
         alert('you already played that cell');
       }
     } else {
         alert('Enter a valid cell in the board');
     }
-    //
+  updateSummary();
 }
 //initializing game
 //retrieving the board from the DOM
-boardObj = {
+var boardObj = {
     '0': {
         '0': document.getElementById('board').rows['1'].cells['1'],
         '1': document.getElementById('board').rows['1'].cells['2'],
@@ -223,11 +243,11 @@ boardObj = {
     
 };
 //setting up random ships on the board and initial empty variables
-randShips = randomShipsArray();
-cellsPlayed = [];
-countsOfHit = 0;
-countsOfMiss = 0;
-cellsLeftToDestroy = randShips.length * 3;
+var randShips = randomShipsArray();
+var cellsPlayed = [];
+var countsOfHit = 0;
+var countsOfMiss = 0;
+var cellsLeftToDestroy = randShips.length * 3;
 //bound button click to function
-btn1 = document.getElementById('button1');
+var btn1 = document.getElementById('button1');
 btn1.onclick = function(){gameLoop()};
