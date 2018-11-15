@@ -1,9 +1,9 @@
 //functions declaration
 function randomShip(cell) {
   //cell is an array representing a position in the board like this -> [0,1]
-  let ship = [];
+  var ship = [];
   ship.push(cell);
-  let isHorizontal = randomFromRange(0,1);
+  var isHorizontal = randomFromRange(0,1);
   //isHorizontal is just a random 0 or 1 to decide the direction of the ship position, if 0 the ship is vertical if 1 horizontal
   if (isHorizontal) {
     //if the ship position is horizontal
@@ -30,7 +30,7 @@ function randomShip(cell) {
 }
 function randomFromRange(bottomLimit, upperLimit) {
   //creates a random integer between bottomLimit and upperLimit
-    let myRange = upperLimit - bottomLimit;
+    var myRange = upperLimit - bottomLimit;
     return (Math.round((Math.random() * myRange) + bottomLimit));
 }
 function randomCell() {
@@ -39,12 +39,12 @@ function randomCell() {
 }
 function numToChar(num) {
   //returns the ordered alphabetic letter equivalent to the giving number 'num' starting from 0. i.e '1 -> B'
-  let template = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G'};
+  var template = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G'};
   return template[num];
 }
 function charToNum(char) {
     //giving a string identifying the cell it returns an array
-    let template = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6};
+    var template = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6};
     if (typeof(char) == 'boolean') {
         return false;
     } else {
@@ -53,7 +53,7 @@ function charToNum(char) {
 }
 function validateInput(userInput) {
     //validates user input. If userInput is a string that is not a cell in the board it returns false, else returns the cell in the format 'A1'. if the cell is valid but in lowercase it returns the first letter in uppercase 'a1' -> 'A1'.
-    let validStrings = ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
+    var validStrings = ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
                         'B0', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6',
                         'C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6',
                         'D0', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6',
@@ -110,7 +110,7 @@ function drawOnBoard([cellArray, isHit]) {
     } else {
         boardObj[cellArray[0]][cellArray[1]].innerHTML = 'MISS';
     }
-  boardObj[cellArray[0]][cellArray[1]].bgColor = 'lightgrey';
+  boardObj[cellArray[0]][cellArray[1]].setAttribute('class', 'played');
 }
 function newPlayedCell(arr) {
   //check if the user input cell has been played before, if not returns true, else return false.

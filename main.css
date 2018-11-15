@@ -28,3 +28,10 @@ table td {
   border-color: black;
   color: hsl(0, 50%, 70%);
 }
+
+.played {
+  background-color: gray;
+  color: black;
+  font-size: 14px;
+  width: 50px;
+}
