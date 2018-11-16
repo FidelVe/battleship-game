@@ -1,15 +1,14 @@
-h1, div {
+h1,
+div {
   margin: 10px auto;
   width: 400px;
 }
+
 h1 {
   text-align: center;
 }
+
 table {
-/*
-  width: 528px;
-  height: 528px;
-*/
   text-align: center;
   border-style: solid;
   border-width: thin;
@@ -18,17 +17,21 @@ table {
   top: 76px;
   left: 134px;
 }
+
 table * {
   border-width: thin;
   border-style: solid;
 }
+
 table caption {
   text-transform: uppercase;
   border: none;
 }
+
 table th {
   border-style: dashed;
 }
+
 table td {
   border-color: black;
   color: white;
@@ -37,14 +40,9 @@ table td {
   height: 72px;
 }
 
-.played {
-  background-color: gray;
-  color: black;
-  font-size: 14px;
-/*
-  width: 70px;
-  height: 70px;
-*/
+#mainBody {
+  width: 1000px;
+  height: 800px;
 }
 
 #id1 {
@@ -52,4 +50,27 @@ table td {
   height: 680px;
   background-image: url(board.jpg);
   background-size: 800px;
+  float: left;
+}
+
+#result {
+  float: right;
+  width: 200px;
+  margin-top: 200px;
+}
+
+.playedCell {
+  background-size: 65px;
+  width: 65px;
+  height: 30px;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.shipImg {
+  background-image: url(ship.png);
+}
+
+.missImg {
+  background-image: url(miss.png);
 }
