@@ -1,0 +1,55 @@
+h1, div {
+  margin: 10px auto;
+  width: 400px;
+}
+h1 {
+  text-align: center;
+}
+table {
+/*
+  width: 528px;
+  height: 528px;
+*/
+  text-align: center;
+  border-style: solid;
+  border-width: thin;
+  border-collapse: collapse;
+  position: relative;
+  top: 76px;
+  left: 134px;
+}
+table * {
+  border-width: thin;
+  border-style: solid;
+}
+table caption {
+  text-transform: uppercase;
+  border: none;
+}
+table th {
+  border-style: dashed;
+}
+table td {
+  border-color: black;
+  color: white;
+  font-weight: 600;
+  width: 72px;
+  height: 72px;
+}
+
+.played {
+  background-color: gray;
+  color: black;
+  font-size: 14px;
+/*
+  width: 70px;
+  height: 70px;
+*/
+}
+
+#id1 {
+  width: 800px;
+  height: 680px;
+  background-image: url(board.jpg);
+  background-size: 800px;
+}
